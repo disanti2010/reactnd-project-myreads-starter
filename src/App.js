@@ -1,5 +1,5 @@
 import React from "react";
-// import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from "./BooksAPI";
 import Book from "./components/Book";
 import "./App.css";
 
@@ -11,8 +11,37 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    showSearchPage: false
+    showSearchPage: false,
+    currentlyReadingBooks: [],
+    wantToReadBooks: [],
+    readBooks: []
   };
+
+  getAllBooks = () => {
+    BooksAPI.getAll().then(books => {
+      const currentlyReadingBooks = books.filter(book => {
+        return book.shelf === "currentlyReading";
+      });
+
+      const readBooks = books.filter(book => {
+        return book.shelf === "read";
+      });
+
+      const wantToReadBooks = books.filter(book => {
+        return book.shelf === "wantToRead";
+      });
+
+      this.setState({
+        currentlyReadingBooks,
+        readBooks,
+        wantToReadBooks
+      });
+    });
+  };
+
+  componentDidMount() {
+    this.getAllBooks();
+  }
 
   render() {
     return (
@@ -53,13 +82,18 @@ class BooksApp extends React.Component {
                   <h2 className="bookshelf-title">Currently Reading</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                      <li>
-                        <Book
-                          label="Ender's Game"
-                          author="Harper Lee"
-                          urlImage="http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api"
-                        />
-                      </li>
+                      {this.state.currentlyReadingBooks &&
+                        this.state.currentlyReadingBooks.map((book, index) => {
+                          return (
+                            <li key={index}>
+                              <Book
+                                label={book.title}
+                                authors={book.authors}
+                                urlImage={book.imageLinks.thumbnail}
+                              />
+                            </li>
+                          );
+                        })}
                     </ol>
                   </div>
                 </div>
@@ -67,19 +101,38 @@ class BooksApp extends React.Component {
                   <h2 className="bookshelf-title">Want to Read</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                      <li>
-                        <Book
-                          label="1776"
-                          author="David McCullough"
-                          urlImage="http://books.google.com/books/content?id=uu1mC6zWNTwC&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73pGHfBNSsJG9Y8kRBpmLUft9O4BfItHioHolWNKOdLavw-SLcXADy3CPAfJ0_qMb18RmCa7Ds1cTdpM3dxAGJs8zfCfm8c6ggBIjzKT7XR5FIB53HHOhnsT7a0Cc-PpneWq9zX&source=gbs_api"
-                        />
-                      </li>
+                      {this.state.wantToReadBooks &&
+                        this.state.wantToReadBooks.map((book, index) => {
+                          return (
+                            <li key={index}>
+                              <Book
+                                label={book.title}
+                                authors={book.authors}
+                                urlImage={book.imageLinks.thumbnail}
+                              />
+                            </li>
+                          );
+                        })}
                     </ol>
                   </div>
                 </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Read</h2>
                   <div className="bookshelf-books" />
+                  <ol className="books-grid">
+                    {this.state.readBooks &&
+                      this.state.readBooks.map((book, index) => {
+                        return (
+                          <li key={index}>
+                            <Book
+                              label={book.title}
+                              authors={book.authors}
+                              urlImage={book.imageLinks.thumbnail}
+                            />
+                          </li>
+                        );
+                      })}
+                  </ol>
                 </div>
               </div>
             </div>

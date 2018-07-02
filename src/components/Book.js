@@ -5,12 +5,12 @@ import Select from "./Select";
 class Book extends Component {
   static propTypes = {
     label: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
+    authors: PropTypes.array.isRequired,
     urlImage: PropTypes.string.isRequired
   };
 
   render() {
-    const { label, author, urlImage } = this.props;
+    const { label, authors, urlImage } = this.props;
 
     const labelSelect = {
       value: "moveto",
@@ -51,7 +51,14 @@ class Book extends Component {
           </div>
         </div>
         <div className="book-title">{label}</div>
-        <div className="book-authors">{author}</div>
+        <div className="book-authors">
+          <ol>
+            {authors &&
+              authors.map((author, index) => {
+                return <li key={index}>{author}</li>;
+              })}
+          </ol>
+        </div>
       </div>
     );
   }

@@ -14,8 +14,10 @@ class Select extends Component {
         <option value={label.value} disabled>
           {label.description}
         </option>
-        {options.map(option => (
-          <option value={option.value}>{option.description}</option>
+        {options.map((option, index) => (
+          <option key={index} value={option.value}>
+            {option.description}
+          </option>
         ))}
       </select>
     );
