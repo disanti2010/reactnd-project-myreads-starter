@@ -4,13 +4,12 @@ import Select from "./Select";
 
 class Book extends Component {
   static propTypes = {
-    label: PropTypes.string.isRequired,
-    authors: PropTypes.array.isRequired,
-    urlImage: PropTypes.string.isRequired
+    book: PropTypes.object.isRequired,
+    onChangeStatus: PropTypes.func
   };
 
   render() {
-    const { label, authors, urlImage } = this.props;
+    const { book, onChangeStatus } = this.props;
 
     const labelSelect = {
       value: "moveto",
@@ -35,6 +34,12 @@ class Book extends Component {
         description: "None"
       }
     ];
+
+    const onChangeStatusBook = selectedValue => {
+      if (onChangeStatus && typeof onChangeStatus === "function") {
+        onChangeStatus(book, selectedValue);
+      }
+    };
     return (
       <div className="book">
         <div className="book-top">
@@ -43,18 +48,24 @@ class Book extends Component {
             style={{
               width: 128,
               height: 193,
-              backgroundImage: "url(" + urlImage + ")"
+              backgroundImage: "url(" + book.imageLinks.thumbnail + ")"
             }}
           />
           <div className="book-shelf-changer">
-            <Select label={labelSelect} options={optionsSelect} />
+            <Select
+              label={labelSelect}
+              options={optionsSelect}
+              changeMethod={selectedValue => {
+                onChangeStatusBook(selectedValue);
+              }}
+            />
           </div>
         </div>
-        <div className="book-title">{label}</div>
+        <div className="book-title">{book.title}</div>
         <div className="book-authors">
           <ol>
-            {authors &&
-              authors.map((author, index) => {
+            {book.authors &&
+              book.authors.map((author, index) => {
                 return <li key={index}>{author}</li>;
               })}
           </ol>

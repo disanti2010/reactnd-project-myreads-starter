@@ -39,6 +39,10 @@ class BooksApp extends React.Component {
     });
   };
 
+  changeMethodStatus = (book, selectedValue) => {
+    BooksAPI.update(book, selectedValue).then(response => {});
+  };
+
   componentDidMount() {
     this.getAllBooks();
   }
@@ -87,9 +91,8 @@ class BooksApp extends React.Component {
                           return (
                             <li key={index}>
                               <Book
-                                label={book.title}
-                                authors={book.authors}
-                                urlImage={book.imageLinks.thumbnail}
+                                book={book}
+                                onChangeStatus={this.changeMethodStatus}
                               />
                             </li>
                           );
@@ -106,9 +109,8 @@ class BooksApp extends React.Component {
                           return (
                             <li key={index}>
                               <Book
-                                label={book.title}
-                                authors={book.authors}
-                                urlImage={book.imageLinks.thumbnail}
+                                book={book}
+                                onChangeStatus={this.changeMethodStatus}
                               />
                             </li>
                           );
@@ -125,9 +127,8 @@ class BooksApp extends React.Component {
                         return (
                           <li key={index}>
                             <Book
-                              label={book.title}
-                              authors={book.authors}
-                              urlImage={book.imageLinks.thumbnail}
+                              book={book}
+                              onChangeStatus={this.changeMethodStatus}
                             />
                           </li>
                         );
