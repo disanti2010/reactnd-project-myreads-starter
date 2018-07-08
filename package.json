@@ -17,7 +17,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "enzyme": "3.3.0",
-    "enzyme-adapter-react-15": "1.1.1",
+    "enzyme-adapter-react-16": "1.1.1",
     "jest": "^23.3.0",
     "jest-css-modules": "^1.1.0",
     "mock-local-storage": "^1.0.5",
@@ -37,7 +37,5 @@
     },
     "setupTestFrameworkScriptFile": "mock-local-storage"
   },
-  "setupFiles": [
-    "<rootDir>/src/setupTests.js"
-  ]
+  "setupFiles": ["<rootDir>/src/setupTests.js"]
 }
