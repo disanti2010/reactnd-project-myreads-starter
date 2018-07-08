@@ -47,28 +47,37 @@ export default class Home extends Component {
     this.getAllBooks();
   }
   render() {
+    const Shelves = () => {
+      const shelfContent = [
+        {
+          title: "Currenty Reading",
+          books: this.state.currentlyReadingBooks
+        },
+        {
+          title: "Want to Read",
+          books: this.state.wantToReadBooks
+        },
+        {
+          title: "Read",
+          books: this.state.readBooks
+        }
+      ];
+      return shelfContent.map(shelf => {
+        return (
+          <BookShelf
+            shelfTitle={shelf.title}
+            books={shelf.books}
+            onChangeStatus={this.changeMethodStatus}
+            showLoading={this.state.showLoadingShelfBooks}
+          />
+        );
+      });
+    };
     return (
       <div className="list-books">
         <div className="list-books-content">
           <div>
-            <BookShelf
-              shelfTitle="Currenty Reading"
-              books={this.state.currentlyReadingBooks}
-              onChangeStatus={this.changeMethodStatus}
-              showLoading={this.state.showLoadingShelfBooks}
-            />
-            <BookShelf
-              shelfTitle="Want to Read"
-              books={this.state.wantToReadBooks}
-              onChangeStatus={this.changeMethodStatus}
-              showLoading={this.state.showLoadingShelfBooks}
-            />
-            <BookShelf
-              shelfTitle="Read"
-              books={this.state.readBooks}
-              onChangeStatus={this.changeMethodStatus}
-              showLoading={this.state.showLoadingShelfBooks}
-            />
+            <Shelves />
           </div>
         </div>
         <div className="open-search">
