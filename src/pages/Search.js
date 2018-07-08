@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import * as BooksAPI from "../BooksAPI";
-import Book from "../components/Book";
+import BookShelf from "../components/BookShelf";
+import Snackbar from "@material-ui/core/Snackbar";
 
 export default class Search extends Component {
   state = {
     query: null,
-    books: []
+    books: [],
+    showLoading: false,
+    openSnack: false,
+    snackMessage: ""
   };
 
   searchBooks = event => {
@@ -20,23 +24,30 @@ export default class Search extends Component {
       });
       return false;
     }
-
+    this.setState({ showLoading: true });
     BooksAPI.search(this.state.query, 20).then(books => {
+      if (!books || !books.length) {
+        books = [];
+      }
       this.setState({
-        books
+        books,
+        showLoading: false
       });
     });
   };
 
   changeMethodStatus = (book, shelf) => {
-    BooksAPI.update(book, shelf);
+    this.setState({ showLoading: true });
+    BooksAPI.update(book, shelf).then(() => {
+      this.setState({
+        showLoading: false,
+        openSnack: true,
+        snackMessage: "Book added sucessfully!"
+      });
+    });
   };
 
   render() {
-    const validateBooksPresence = () => {
-      return this.state.books && !this.state.books.error;
-    };
-
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -61,20 +72,19 @@ export default class Search extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid">
-            {validateBooksPresence() &&
-              this.state.books.map((book, index) => {
-                return (
-                  <li key={index}>
-                    <Book
-                      book={book}
-                      onChangeStatus={this.changeMethodStatus}
-                    />
-                  </li>
-                );
-              })}
-          </ol>
+          <div className="container-loading-books">
+            <BookShelf
+              books={this.state.books}
+              onChangeStatus={this.changeMethodStatus}
+              showLoading={this.state.showLoading}
+            />
+          </div>
         </div>
+        <Snackbar
+          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+          open={this.state.openSnack}
+          message={<span>{this.state.snackMessage}</span>}
+        />
       </div>
     );
   }

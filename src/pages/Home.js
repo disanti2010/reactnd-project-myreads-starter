@@ -9,11 +9,14 @@ export default class Home extends Component {
   state = {
     currentlyReadingBooks: [],
     wantToReadBooks: [],
-    readBooks: []
+    readBooks: [],
+    showLoadingShelfBooks: false
   };
 
   getAllBooks = () => {
+    this.setState({ showLoadingShelfBooks: true });
     BooksAPI.getAll().then(books => {
+      this.setState({ showLoadingShelfBooks: false });
       const currentlyReadingBooks = books.filter(book => {
         return book.shelf === "currentlyReading";
       });
@@ -52,16 +55,19 @@ export default class Home extends Component {
               shelfTitle="Currenty Reading"
               books={this.state.currentlyReadingBooks}
               onChangeStatus={this.changeMethodStatus}
+              showLoading={this.state.showLoadingShelfBooks}
             />
             <BookShelf
               shelfTitle="Want to Read"
               books={this.state.wantToReadBooks}
               onChangeStatus={this.changeMethodStatus}
+              showLoading={this.state.showLoadingShelfBooks}
             />
             <BookShelf
               shelfTitle="Read"
               books={this.state.readBooks}
               onChangeStatus={this.changeMethodStatus}
+              showLoading={this.state.showLoadingShelfBooks}
             />
           </div>
         </div>

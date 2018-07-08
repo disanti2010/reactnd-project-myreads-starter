@@ -98,7 +98,7 @@ body,
 }
 
 .search-books-results {
-  padding: 80px 10px 20px;
+  padding: 10px 10px 20px;
 }
 
 /* books grid */
@@ -129,6 +129,13 @@ body,
 }
 .book-authors {
   color: #999;
+}
+.book-authors ol {
+  list-style: none;
+}
+.book-authors ol,
+.book-authors ol li {
+  padding: 0px;
 }
 
 .book-top {
@@ -174,4 +181,8 @@ body,
 .navbar {
   background-color: #60ac5d !important;
   color: #fff;
+}
+
+.container-loading-books {
+  text-align: center;
 }

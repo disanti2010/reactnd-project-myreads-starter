@@ -10,7 +10,7 @@ class Select extends Component {
   };
 
   state = {
-    currentSelected: null
+    currentSelected: ""
   };
 
   componentDidMount() {
@@ -28,11 +28,7 @@ class Select extends Component {
     };
     return (
       <select onChange={onChangeSelect} value={this.state.currentSelected}>
-        <option
-          value={label.value}
-          disabled
-          selected={this.state.currentSelected === label.value}
-        >
+        <option value={label.value} disabled>
           {label.description}
         </option>
         {options.map((option, index) => (
