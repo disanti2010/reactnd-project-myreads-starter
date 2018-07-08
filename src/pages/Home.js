@@ -62,9 +62,10 @@ export default class Home extends Component {
           books: this.state.readBooks
         }
       ];
-      return shelfContent.map(shelf => {
+      return shelfContent.map((shelf, index) => {
         return (
           <BookShelf
+            key={index}
             shelfTitle={shelf.title}
             books={shelf.books}
             onChangeStatus={this.changeMethodStatus}
