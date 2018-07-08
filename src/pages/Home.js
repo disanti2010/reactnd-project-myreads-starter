@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import * as BooksAPI from "../BooksAPI";
-import Book from "../components/Book";
+import BookShelf from "../components/BookShelf";
+import Button from "@material-ui/core/Button";
+import Icon from "@material-ui/core/Icon";
 
 export default class Home extends Component {
   state = {
@@ -44,68 +46,28 @@ export default class Home extends Component {
   render() {
     return (
       <div className="list-books">
-        <div className="list-books-title">
-          <h1>MyReads</h1>
-        </div>
         <div className="list-books-content">
           <div>
-            <div className="bookshelf">
-              <h2 className="bookshelf-title">Currently Reading</h2>
-              <div className="bookshelf-books">
-                <ol className="books-grid">
-                  {this.state.currentlyReadingBooks &&
-                    this.state.currentlyReadingBooks.map((book, index) => {
-                      return (
-                        <li key={index}>
-                          <Book
-                            book={book}
-                            onChangeStatus={this.changeMethodStatus}
-                          />
-                        </li>
-                      );
-                    })}
-                </ol>
-              </div>
-            </div>
-            <div className="bookshelf">
-              <h2 className="bookshelf-title">Want to Read</h2>
-              <div className="bookshelf-books">
-                <ol className="books-grid">
-                  {this.state.wantToReadBooks &&
-                    this.state.wantToReadBooks.map((book, index) => {
-                      return (
-                        <li key={index}>
-                          <Book
-                            book={book}
-                            onChangeStatus={this.changeMethodStatus}
-                          />
-                        </li>
-                      );
-                    })}
-                </ol>
-              </div>
-            </div>
-            <div className="bookshelf">
-              <h2 className="bookshelf-title">Read</h2>
-              <div className="bookshelf-books" />
-              <ol className="books-grid">
-                {this.state.readBooks &&
-                  this.state.readBooks.map((book, index) => {
-                    return (
-                      <li key={index}>
-                        <Book
-                          book={book}
-                          onChangeStatus={this.changeMethodStatus}
-                        />
-                      </li>
-                    );
-                  })}
-              </ol>
-            </div>
+            <BookShelf
+              books={this.state.currentlyReadingBooks}
+              onChangeStatus={this.changeMethodStatus}
+            />
+            <BookShelf
+              books={this.state.wantToReadBooks}
+              onChangeStatus={this.changeMethodStatus}
+            />
+            <BookShelf
+              books={this.state.readBooks}
+              onChangeStatus={this.changeMethodStatus}
+            />
           </div>
         </div>
         <div className="open-search">
-          <Link to="/search">Add a book</Link>
+          <Link to="/search">
+            <Button color="secondary" variant="fab" aria-label="add">
+              <Icon>add</Icon>
+            </Button>
+          </Link>
         </div>
       </div>
     );

@@ -8,7 +8,7 @@ body {
 }
 body,
 .app {
-  background: white;
+  background: #f7f7f7;
 }
 
 /* main page */
@@ -56,13 +56,13 @@ body,
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: #2e7d32;
   background-image: url("./icons/add.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 28px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   font-size: 0;
+  text-decoration: none;
 }
 
 /* search page */
@@ -174,4 +174,9 @@ body,
   padding: 20px 10px 0;
   text-align: center;
   font-size: 0.8em;
+}
+
+.navbar {
+  background-color: #60ac5d !important;
+  color: #fff;
 }
