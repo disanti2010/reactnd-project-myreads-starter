@@ -30,20 +30,20 @@ body,
 }
 
 .bookshelf {
-  padding: 0 10px 20px;
-}
-
-@media (min-width: 600px) {
-  .bookshelf {
-    padding: 0 20px 40px;
-  }
+  padding: 40px 40px 0px 40px;
 }
 
 .bookshelf-title {
-  border-bottom: 1px solid #dedede;
+  margin-top: 0px;
 }
+
 .bookshelf-books {
   text-align: center;
+  padding: 28px;
+}
+
+.bookshelf-card {
+  padding: 28px;
 }
 
 .open-search {
@@ -145,7 +145,7 @@ body,
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #60ac5d;
+  background: #3f51b5;
   background-image: url("./icons/arrow-drop-down.svg");
   background-repeat: no-repeat;
   background-position: center;

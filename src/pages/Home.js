@@ -49,14 +49,17 @@ export default class Home extends Component {
         <div className="list-books-content">
           <div>
             <BookShelf
+              shelfTitle="Currenty Reading"
               books={this.state.currentlyReadingBooks}
               onChangeStatus={this.changeMethodStatus}
             />
             <BookShelf
+              shelfTitle="Want to Read"
               books={this.state.wantToReadBooks}
               onChangeStatus={this.changeMethodStatus}
             />
             <BookShelf
+              shelfTitle="Read"
               books={this.state.readBooks}
               onChangeStatus={this.changeMethodStatus}
             />

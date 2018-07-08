@@ -55,6 +55,7 @@ class Book extends Component {
           <div className="book-shelf-changer">
             <Select
               label={labelSelect}
+              currentSelected={book.shelf}
               options={optionsSelect}
               changeMethod={selectedValue => {
                 onChangeStatusBook(selectedValue);

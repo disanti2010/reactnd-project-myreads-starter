@@ -6,14 +6,15 @@ import Card from "@material-ui/core/Card";
 export default class BookShelf extends Component {
   static propTypes = {
     books: PropTypes.array.isRequired,
-    onChangeStatus: PropTypes.func
+    onChangeStatus: PropTypes.func,
+    shelfTitle: PropTypes.string
   };
   render() {
-    const { books, onChangeStatus } = this.props;
+    const { books, onChangeStatus, shelfTitle } = this.props;
     return (
       <div className="bookshelf">
-        <Card>
-          <h2>Currently Reading</h2>
+        <Card className="bookshelf-card">
+          <h2 className="bookshelf-title">{shelfTitle}</h2>
           <div className="bookshelf-books">
             <ol className="books-grid">
               {books &&

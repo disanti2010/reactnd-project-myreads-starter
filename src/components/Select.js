@@ -5,19 +5,34 @@ class Select extends Component {
   static propTypes = {
     label: PropTypes.object,
     options: PropTypes.array.isRequired,
-    changeMethod: PropTypes.func
+    changeMethod: PropTypes.func,
+    currentSelected: PropTypes.string
   };
+
+  state = {
+    currentSelected: null
+  };
+
+  componentDidMount() {
+    const { currentSelected } = this.props;
+    this.setState({ currentSelected });
+  }
 
   render() {
     const { label, options, changeMethod } = this.props;
     const onChangeSelect = event => {
       if (changeMethod && typeof changeMethod === "function") {
+        this.setState({ currentSelected: event.target.value });
         changeMethod(event.target.value);
       }
     };
     return (
-      <select onChange={onChangeSelect}>
-        <option value={label.value} disabled>
+      <select onChange={onChangeSelect} value={this.state.currentSelected}>
+        <option
+          value={label.value}
+          disabled
+          selected={this.state.currentSelected === label.value}
+        >
           {label.description}
         </option>
         {options.map((option, index) => (
