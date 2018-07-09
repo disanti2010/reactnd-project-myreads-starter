@@ -37,5 +37,7 @@
     },
     "setupTestFrameworkScriptFile": "mock-local-storage"
   },
-  "setupFiles": ["<rootDir>/src/setupTests.js"]
+  "setupFiles": [
+    "<rootDir>/src/setupTests.js"
+  ]
 }
