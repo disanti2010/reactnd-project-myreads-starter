@@ -1,6 +1,6 @@
 # Projeto MyReads
 
-Este é o primeiro projeto desenvolvimento no Nanodegree de React realizado pela Udacity. O App possui três prateleiras de livros, quero ler, estou lendo e lido. A aplicação faz conexão com uma API da udacity em que proporciona todos os livros utilizados na realização desse projeto.
+Este é o primeiro projeto desenvolvido no Nanodegree de React realizado pela Udacity. O App possui três prateleiras de livros, quero ler, estou lendo e lido. A aplicação faz conexão com uma API da udacity em que proporciona todos os livros para adicionar nas devidas prateleiras.
 
 ## Como iniciar a aplicação
 
