@@ -1,7 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
 import Book from "../Book";
-import Select from "../Select";
 import "../../setupTests";
 
 const book = {

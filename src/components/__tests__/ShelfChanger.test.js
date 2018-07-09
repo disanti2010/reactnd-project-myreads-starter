@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import Book from "../Book";
-import Select from "../Select";
+import ShelfChanger from "../ShelfChanger";
 import "../../setupTests";
 
 const labelSelect = {
@@ -30,7 +30,7 @@ var optionsSelect = [
 
 it("Select component has the right selected value", () => {
   const wrapper = shallow(
-    <Select
+    <ShelfChanger
       label={labelSelect}
       options={optionsSelect}
       currentSelected="currentlyReading"
@@ -42,7 +42,7 @@ it("Select component has the right selected value", () => {
 
 it("Select component rendered", () => {
   const wrapper = shallow(
-    <Select
+    <ShelfChanger
       label={labelSelect}
       options={optionsSelect}
       currentSelected="currentlyReading"

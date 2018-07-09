@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-class Select extends Component {
+class ShelfChanger extends Component {
   static propTypes = {
     label: PropTypes.object,
     options: PropTypes.array.isRequired,
@@ -41,4 +41,4 @@ class Select extends Component {
   }
 }
 
-export default Select;
+export default ShelfChanger;

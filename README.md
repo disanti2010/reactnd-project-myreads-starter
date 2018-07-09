@@ -23,10 +23,10 @@ Para iniciar o ambiente de desenvolvimento, execute os seguintes comandos:
     │   │── __tests__ # Pasta de testes da aplicação
     │   │   ├── App.test.js
     │   │   ├── Book.test.js
-    │   │   └── Select.test.js
+    │   │   └── ShelfChanger.test.js
     │   ├── Book.js
     │   ├── BookShelf.js
-    │   └── Select.js
+    │   └── ShelfChanger.js
     ├── pages # Pasta de componentes que englobam os demais, ou seja, páginas
     │   ├── Home.js
     │   └── Search.js
