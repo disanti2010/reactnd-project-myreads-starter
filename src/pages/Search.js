@@ -6,7 +6,6 @@ import { DebounceInput } from "react-debounce-input";
 
 export default class Search extends Component {
   state = {
-    query: null,
     books: [],
     showLoading: false
   };
@@ -18,10 +17,7 @@ export default class Search extends Component {
   /* Função para buscar os livros e validando caso input esteja vazio*/
   searchBooks = event => {
     const consulta = event.target.value;
-    const { query } = this.state;
-    this.setState({
-      query: consulta
-    });
+
     if (!consulta) {
       this.setState({
         books: []
@@ -29,7 +25,7 @@ export default class Search extends Component {
       return false;
     }
     this.setState({ showLoading: true });
-    BooksAPI.search(query, 20).then(books => {
+    BooksAPI.search(consulta, 20).then(books => {
       if (!books || !books.length) {
         books = [];
       }
@@ -69,7 +65,9 @@ export default class Search extends Component {
               minLength={2}
               placeholder="Search by title or author"
               debounceTimeout={800}
-              onChange={this.searchBooks}
+              onChange={event => {
+                this.searchBooks(event);
+              }}
             />
           </div>
         </div>

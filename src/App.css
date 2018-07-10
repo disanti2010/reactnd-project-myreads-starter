@@ -138,6 +138,10 @@ body,
   padding: 0px;
 }
 
+.book-category {
+  margin-top: 12px;
+}
+
 .book-top {
   position: relative;
   height: 200px;

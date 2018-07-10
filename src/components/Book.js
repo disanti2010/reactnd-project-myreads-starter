@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ShelfChanger from "./ShelfChanger";
+import BookDetails from "./BookDetails";
 
 const Book = props => {
   const { book, onChangeStatus } = props;
@@ -67,6 +68,12 @@ const Book = props => {
             })}
         </ol>
       </div>
+      <BookDetails
+        detailsTitle={book.title}
+        detailsContent={book.description}
+        detailsCategories={book.categories}
+        textButton="more details"
+      />
     </div>
   );
 };

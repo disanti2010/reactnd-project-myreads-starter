@@ -29,7 +29,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest",
+    "test": "jest --coverage",
     "eject": "react-scripts eject"
   },
   "jest": {
@@ -38,7 +38,5 @@
     },
     "setupTestFrameworkScriptFile": "mock-local-storage"
   },
-  "setupFiles": [
-    "<rootDir>/src/setupTests.js"
-  ]
+  "setupFiles": ["<rootDir>/src/setupTests.js"]
 }
