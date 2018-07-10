@@ -2,52 +2,59 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import * as BooksAPI from "../BooksAPI";
 import BookShelf from "../components/BookShelf";
-import Snackbar from "@material-ui/core/Snackbar";
+import { DebounceInput } from "react-debounce-input";
 
 export default class Search extends Component {
   state = {
     query: null,
     books: [],
-    showLoading: false,
-    openSnack: false,
-    snackMessage: ""
+    showLoading: false
   };
 
+  componentWillReceiveProps(prop) {
+    this.setShelfBookStatus(this.state.books);
+  }
+
   searchBooks = event => {
-    const query = event.target.value;
+    const consulta = event.target.value;
+    const { query } = this.state;
     this.setState({
-      query
+      query: consulta
     });
-    if (!query) {
+    if (!consulta) {
       this.setState({
         books: []
       });
       return false;
     }
     this.setState({ showLoading: true });
-    BooksAPI.search(this.state.query, 20).then(books => {
+    BooksAPI.search(query, 20).then(books => {
       if (!books || !books.length) {
         books = [];
       }
-      this.setState({
-        books,
-        showLoading: false
-      });
+      this.setShelfBookStatus(books);
     });
   };
 
-  changeMethodStatus = (book, shelf) => {
-    this.setState({ showLoading: true });
-    BooksAPI.update(book, shelf).then(() => {
-      this.setState({
-        showLoading: false,
-        openSnack: true,
-        snackMessage: "Book added sucessfully!"
-      });
+  setShelfBookStatus = books => {
+    books.map(book => {
+      for (let item of this.props.booksShelf) {
+        if (item.id === book.id) {
+          book.shelf = item.shelf;
+        }
+      }
+
+      if (!book.shelf) book.shelf = "none";
+      return book;
+    });
+    this.setState({
+      books,
+      showLoading: false
     });
   };
 
   render() {
+    const { onShelfChange } = this.props;
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -64,10 +71,11 @@ export default class Search extends Component {
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
-            <input
-              type="text"
-              onChange={this.searchBooks}
+            <DebounceInput
+              minLength={2}
               placeholder="Search by title or author"
+              debounceTimeout={800}
+              onChange={this.searchBooks}
             />
           </div>
         </div>
@@ -75,16 +83,11 @@ export default class Search extends Component {
           <div className="container-loading-books">
             <BookShelf
               books={this.state.books}
-              onChangeStatus={this.changeMethodStatus}
+              onChangeStatus={onShelfChange}
               showLoading={this.state.showLoading}
             />
           </div>
         </div>
-        <Snackbar
-          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-          open={this.state.openSnack}
-          message={<span>{this.state.snackMessage}</span>}
-        />
       </div>
     );
   }
