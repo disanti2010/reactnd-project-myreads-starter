@@ -29,6 +29,7 @@ class BooksApp extends React.Component {
     });
   };
 
+  /* Função responsável por atualizar a prateleira e exibir mensagem de sucesso. */
   changeMethodStatus = (book, selectedValue) => {
     BooksAPI.update(book, selectedValue).then(() => {
       this.setState({

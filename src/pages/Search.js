@@ -15,6 +15,7 @@ export default class Search extends Component {
     this.setShelfBookStatus(this.state.books);
   }
 
+  /* Função para buscar os livros e validando caso input esteja vazio*/
   searchBooks = event => {
     const consulta = event.target.value;
     const { query } = this.state;
@@ -36,6 +37,7 @@ export default class Search extends Component {
     });
   };
 
+  /* Inserindo atributo shelf para os livros buscados, levando em consideração os das prateleiras */
   setShelfBookStatus = books => {
     books.map(book => {
       for (let item of this.props.booksShelf) {
@@ -63,14 +65,6 @@ export default class Search extends Component {
           </Link>
 
           <div className="search-books-input-wrapper">
-            {/*
-                  NOTES: The search from BooksAPI is limited to a particular set of search terms.
-                  You can find these search terms here:
-                  https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-
-                  However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-                  you don't find a specific author or title. Every search is limited by search terms.
-                */}
             <DebounceInput
               minLength={2}
               placeholder="Search by title or author"

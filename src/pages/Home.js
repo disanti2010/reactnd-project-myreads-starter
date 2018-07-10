@@ -13,6 +13,7 @@ const Home = props => {
     }
   };
 
+  /* Função para filtrar todos os livros por prateleira e exibi-los em seguida */
   const Shelves = () => {
     const shelfContent = [
       {
@@ -44,6 +45,7 @@ const Home = props => {
       );
     });
   };
+
   return (
     <div className="list-books">
       <div className="list-books-content">
