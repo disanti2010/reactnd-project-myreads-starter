@@ -18,9 +18,9 @@ const BookShelf = props => {
             {!showLoading &&
               books &&
               !books.error &&
-              books.map((book, index) => {
+              books.map(book => {
                 return (
-                  <li key={index}>
+                  <li className="list-item-book" key={book.id}>
                     <Book book={book} onChangeStatus={onChangeStatus} />
                   </li>
                 );

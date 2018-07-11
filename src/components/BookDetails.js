@@ -7,6 +7,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 import Chip from "@material-ui/core/Chip";
+import ReactStars from "react-stars";
 import PropTypes from "prop-types";
 
 class BookDetails extends Component {
@@ -14,7 +15,8 @@ class BookDetails extends Component {
     textButton: PropTypes.string,
     detailsTitle: PropTypes.string,
     detailsContent: PropTypes.string,
-    detailsCategories: PropTypes.array
+    detailsCategories: PropTypes.array,
+    detailsRating: PropTypes.number
   };
   state = {
     open: false
@@ -50,11 +52,29 @@ class BookDetails extends Component {
         >
           <DialogTitle id="alert-dialog-slide-title">
             {detailsTitle}
+
             <br />
+
+            {this.props.detailsRating >= 0 && (
+              <ReactStars
+                count={5}
+                edit={false}
+                size={24}
+                value={this.props.detailsRating}
+                color2={"#ffd700"}
+              />
+            )}
+
             {detailsCategories &&
               detailsCategories.length &&
-              detailsCategories.map(category => {
-                return <Chip className="book-category" label={category} />;
+              detailsCategories.map((category, index) => {
+                return (
+                  <Chip
+                    key={index}
+                    className="book-category"
+                    label={category}
+                  />
+                );
               })}
           </DialogTitle>
           <DialogContent>
@@ -71,6 +91,7 @@ class BookDetails extends Component {
         <Button
           disabled={!detailsTitle || !detailsContent}
           color="primary"
+          variant="contained"
           onClick={() => {
             handleOpen();
           }}

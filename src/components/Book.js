@@ -68,10 +68,12 @@ const Book = props => {
             })}
         </ol>
       </div>
+      <span className="book-bottom" />
       <BookDetails
         detailsTitle={book.title}
         detailsContent={book.description}
         detailsCategories={book.categories}
+        detailsRating={book.averageRating}
         textButton="more details"
       />
     </div>

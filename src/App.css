@@ -119,6 +119,9 @@ body,
 
 .book {
   width: 140px;
+  flex-direction: column;
+  display: flex;
+  margin: 0px 18px 28px 18px;
 }
 .book-title,
 .book-authors {
@@ -147,6 +150,10 @@ body,
   height: 200px;
   display: flex;
   align-items: flex-end;
+}
+
+.list-item-book {
+  display: flex;
 }
 
 .book-shelf-changer {
@@ -189,4 +196,8 @@ body,
 
 .container-loading-books {
   text-align: center;
+}
+
+.book-bottom {
+  flex: 1;
 }
